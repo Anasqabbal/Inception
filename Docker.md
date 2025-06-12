@@ -29,19 +29,21 @@ containers must be packaged to work with the same OS of the server.
 - [Common commands](#common-commands)
 
 # common terms
-- [Docker image](#docker-image)
-- [Docker container](#docker-container)
+- [image in containerization](#docker-image)
+- [container in containerization](#docker-container)
 - [Docker file](#docker-file)
 - [container engine](#container-engine)
 - [application](#application)
 - [Docker compose](#Docker-compose)
 
-## image in containerization
+## docker image
 docker image it is like a blueprint or recipe that contains all necessary information to creat a docker container
 - images can inherit from multiple base images 
 - images does't have a state and never change
+- a dockerfile c contains one image
+- docker-compose can contains multiple images
 
-## container in containerization
+## docker container
 a container is an application that 's been packeged with all its dependencies
 
 - is a runtime instance of an image
@@ -90,17 +92,17 @@ re:
 - `docker images ` lists all docker images stord on your local machine
 
 ## docker compose commands
-`docker-compose up` start a container
-- -d (detachec)
-- --build (rebuild images)
-`docker-compose down` stop and remove a container
-`docker-compose pause` : pause running containers of a service
-`docker-compose unpause` : unpause paused containers of a service
-`docker-compose ps` : lists containers
-- -v (remove volumes)
-- --rmi all (remove all images)
-`docker compose up -d` : launching a container in docker-compose
-`docker compose build` : rebuild images without starting 
+- `docker-compose up` start a container
+	- -d (detachec)
+	- --build (rebuild images)
+- `docker-compose down` stop and remove a container
+- `docker-compose pause` : pause running containers of a service
+- `docker-compose unpause` : unpause paused containers of a service
+- `docker-compose ps` : lists containers
+	- -v (remove volumes)
+	- --rmi all (remove all images)
+- `docker compose up -d` : launching a container in docker-compose
+- `docker compose build` : rebuild images without starting 
 
 ## common command for dockerfile
 
