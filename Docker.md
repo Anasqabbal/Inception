@@ -62,8 +62,21 @@ if a file responsible for configuraion. it specifies the set of software that we
 is the actual software or service designed to perform tasks.
 
 ## docker-compose
-is a tool for defining and runnig multi-container docker applications. with compose you can use YAML (Stands for Yet Another Markup Language) fle to configure your applicaion's services
+is a tool for defining and runnig multi-container docker applications. with compose you can use YAML (Stands for Yet Another Markup Language, it is data serialization language) fle to configure your applicaion's services
 service == container.
+
+### syntax
+![Docker-compose](./Docker-compose.png)
+
+version : wich syntash should be used.  can written in the format "x.x".
+services: you can group here a set of services that you want to run.
+each service can have
+`
+	services:
+		image: name of the service
+		port
+`
+
 
 
 the containter is a set or processes that have a grouping of resources specifically assigned to it
