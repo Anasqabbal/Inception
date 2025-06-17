@@ -51,16 +51,34 @@ docker file is a file responsible for configuration, it specifies the set of sof
 
 dockerfile example
 
-![basic commands](./BasicDockerCommandsss.jpeg)
+![basic commands](./BasicDockerCommands.jpeg)
 
-WORKDIR: set the working directory for the subsequent (RUN, COPY, ...) if the directory does't exist. think of it like cd in shell commands
+FORM: for the base image that contains a set of files and directories and then build on top of it.
+ if you want an empty base image that you can manage it with your standars you can use the keywork `scratch`. the layering starts at zero. you  must provide anything.
+
+WORKDIR: set the working directory for the subsequent (RUN, COPY, ...) if the directory does't exist. think of it like cd in shell commands.
+
+COPY ADD : copy and add files and directories to your image
+
+RUN : execute OS commands.
+
+ENV : set specific environment variables : set environment variables inside a container. environment variables is key=value pairs.  
+
+EXPOSE: container starting on giving port
+
+USER : specifies the user that can run that application
+
+CMD, ENTRYPOINT : the command that should be executed by def when we start our container
+
 
 ## Dangling image
 when you rebuild an existing image with the same tag. the older image lose its tag. if no tag point to the old image. it will appear in your lits.
-these images consume the memory to clean them you can run the command `docker image prune`.
+these images consume the memory. 
+to clean them you can run the command `docker image prune`.
 
 ## Docker container
-a container is an application that 's been packeged with all its dependencies. it is running instance of an images.
+a container is an application that 's been packeged with all its dependencies.
+ it is running instance of an images.
 
 - is a runtime instance of an image
 - image + execution environment + runtime instructions
