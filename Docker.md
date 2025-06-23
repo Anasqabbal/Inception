@@ -17,6 +17,8 @@ it is platform designed to simplify the process of developing shipping and ruuni
 - [container engine](#container-engine)
 - [application](#application)
 - [Docker compose](#Docker-compose)
+- [Daemon](#Daemon)
+- [Prevent caches](#Prevent-caches-on-installation)
 
 # containerization vs virtualization
 both are technologies for running isolated applications.
@@ -53,18 +55,19 @@ dockerfile example
 
 ![basic commands](./BasicDockerCommands.jpeg)
 
-FORM: for the base image that contains a set of files and directories and then build on top of it.
  if you want an empty base image that you can manage it with your standars you can use the keywork `scratch`. the layering starts at zero. you  must provide anything.
+FORM: for the base image that contains a set of files and directories and then build on top of it.
 
 WORKDIR: set the working directory for the subsequent (RUN, COPY, ...) if the directory does't exist. think of it like cd in shell commands.
 
-COPY ADD : copy and add files and directories to your image
+COPY ADD : copy and add files and directories to your image. from the host machine.
 
 RUN : execute OS commands.
 
 ENV : set specific environment variables : set environment variables inside a container. environment variables is key=value pairs.  
 
-EXPOSE: container starting on giving port
+EXPOSE: container starting on giving port. if you don't give any port th container will not any default one unless you explicite one.
+[you can see more about expose and publish](https://www.baeldung.com/ops/docker-expose-vs-publish)
 
 USER : specifies the user that can run that application
 
@@ -113,6 +116,10 @@ docker : to see the available commands
 docker pull : pull the docker image from the Docker Hub
 docker build : creats a docker image from the Dockerfile
 
+
+## Prevent caches on installation
+- reduce the size of the container
+
 # Preparing The Makefile 
 inside our Makefile we can define multiple targets.
 
@@ -152,6 +159,17 @@ re:
 	- --rmi all (remove all images)
 - `docker compose up -d` : launching a container in docker-compose
 - `docker compose build` : rebuild images without starting 
+
+
+## package manager commands
+ - `apk` : stands for alpine package keeper.
+ the package manager like apk stores the downloaded file .deb, .apt ... temporarily.
+ and the caches helps to reinstall and update the package instead of install it from the new. it is use the cashed file
+ - `apk add` : install 
+ - `apk del` ; to delete 
+ - `apk update` : to update 
+ - `apk upgrade` : to upgrade
+
 
 ## Common command for dockerfile
 
