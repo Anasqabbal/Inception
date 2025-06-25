@@ -6,7 +6,6 @@
 it is platform designed to simplify the process of developing shipping and ruuning apps using the containerization. think of it is like a bundle that contains all dependencies that your apps need to run.
 
 - [Common Terms](#common-terms)
-- [Prepare the Makefile](#preparing-the-makefile)
 - [Common commands](#common-commands)
 
 # common terms
@@ -148,15 +147,6 @@ docker build : creats a docker image from the Dockerfile
 ## Metadata in docker
 Metadata in Docker means information about the image or container. not teh actual code or app. like using the ENVIRONMENT variables. using the instruction ENV in Dockerfile or using EXPOSE. just to provide additionatl inforamtion. and it is useful for organizing ,  documentating
 or automating the things.
-
-# Preparing The Makefile 
-inside our Makefile we can define multiple targets.
-
-build:
-down:
-clean:
-fclean:
-re:
 
 # Common commands
 - [Docker commands](#docker-commands)
