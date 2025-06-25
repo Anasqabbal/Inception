@@ -16,9 +16,10 @@ it is platform designed to simplify the process of developing shipping and ruuni
 - [Dangling image](#dangling-image)
 - [container engine](#container-engine)
 - [application](#application)
-- [Docker compose](#Docker-compose)
+- [Docker compose](#docker-compose)
 - [Daemon](#Daemon)
 - [Prevent caches](#Prevent-caches-on-installation)
+- [Meta data in docker](#metadata-in-docker)
 
 # containerization vs virtualization
 both are technologies for running isolated applications.
@@ -94,9 +95,33 @@ the container engine is what unpacks the container files and hands them off to t
 ## Application
 is the actual software or service designed to perform tasks.
 
-## Docker-compose
+## Docker compose
+
 is a tool for defining and runnig multi-container docker applications. with compose you can use YAML (Stands for Yet Another Markup Language, it is data serialization language) fle to configure your applicaion's services
 service == container.
+
+Main structure of a compose file consist of three major part. 
+- [Service](#service)
+- [Volume](#volume)
+- [Network](#network)
+
+the service configuration specified with the tag `service:`
+the configuration options under the service tag
+
+### Service
+
+- build : wich docker file to build from like `build: ./pathToDockerfile`
+or you can use it in the second use like this <br>
+```
+ buidl: 
+	context: relative path to folder of the docker file 
+	dockerfile: the name of your  docker file  
+```
+- command : to use different command from the command that is provided in the image 
+
+### Volume
+### Network 
+
 
 ### Syntax
 ![Docker-compose](./Docker-compose.png)
@@ -120,6 +145,10 @@ docker build : creats a docker image from the Dockerfile
 ## Prevent caches on installation
 - reduce the size of the container
 
+## Metadata in docker
+Metadata in Docker means information about the image or container. not teh actual code or app. like using the ENVIRONMENT variables. using the instruction ENV in Dockerfile or using EXPOSE. just to provide additionatl inforamtion. and it is useful for organizing ,  documentating
+or automating the things.
+
 # Preparing The Makefile 
 inside our Makefile we can define multiple targets.
 
@@ -140,11 +169,17 @@ re:
 - `docker pull `  downloads an image from a docker registry to you local machin
 - `docker build`  builds a new docker image from a dockerfile
 	- -t : stands for (tag). to give your image a name and a tag
-- `docker images ` lists all docker images stord on your local machine
-- `docker image prune`: remove the dangling images and the images that are not associated with any container.
+- `docker images ` lists all docker images stored on your local machine
+- `docker image prune`: remove the dangling images and the images that are not associated with any container. before prune the image you need to stop or remove all container associated with it.
 - `docker rmi <ImageName:ItsTag> or <ImageId>` : to remove specific image. you cannot remove image if there is running container based on it. you must stop it first `docker stop <ImageName:ItsTag> or <ImageId>`
 - `docker ps` : list the running containers
 	-	-a : list all containers not just the running ones.
+	Status :	Created: container exists but hasn't been started yet.
+				running : container is currently executing.
+				paused : container is paused
+				exited container has stopped
+				dead : container should be running but itn't (daemon issue)
+				removing container is being deleted.
 - `docker run [OPTIONS] IMAGE [COMMAND] [ARGS...]` to run a image
 
 ## Docker compose commands
@@ -162,10 +197,10 @@ re:
 
 
 ## package manager commands
- - `apk` : stands for alpine package keeper.
+ - `apk` : stands for Alpine Package Keeper.
  the package manager like apk stores the downloaded file .deb, .apt ... temporarily.
  and the caches helps to reinstall and update the package instead of install it from the new. it is use the cashed file
- - `apk add` : install 
+ - `apk add` : install
  - `apk del` ; to delete 
  - `apk update` : to update 
  - `apk upgrade` : to upgrade
