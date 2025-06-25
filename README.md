@@ -16,8 +16,8 @@ it is platform designed to simplify the process of developing shipping and ruuni
 - [container engine](#container-engine)
 - [application](#application)
 - [Docker compose](#docker-compose)
-- [Daemon](#Daemon)
-- [Prevent caches](#Prevent-caches-on-installation)
+- [Daemon](#daemon)
+- [Prevent caches](#prevent-caches-on-installation)
 - [Meta data in docker](#metadata-in-docker)
 
 # containerization vs virtualization
@@ -142,7 +142,13 @@ docker build : creats a docker image from the Dockerfile
 
 
 ## Prevent caches on installation
-- reduce the size of the container
+
+to prevent system own caches of installer package like apk. use the option `-no--cache` for the package manager apk. we need this to 
+- to reduce the size of the container.
+the cashes used to save the stat of the application package format. to prevent redownload the packgage when you try to install updates. or when you want to redownload the application again. so here the size of your container will be increased.
+
+there another type of caches called (Runtime cache). creat temporary files and this files created by teh app to make it run faster. like the caches in google chrom when you remove it you need to reenter the information. and these caches created by the app itself.
+
 
 ## Metadata in docker
 Metadata in Docker means information about the image or container. not teh actual code or app. like using the ENVIRONMENT variables. using the instruction ENV in Dockerfile or using EXPOSE. just to provide additionatl inforamtion. and it is useful for organizing ,  documentating
