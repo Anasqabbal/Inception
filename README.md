@@ -160,7 +160,6 @@ re:
 
 # Common commands
 - [Docker commands](#docker-commands)
-- [docker file commands](#common-command-for-dockerfile)
 - [docker compose commands](#docker-compose-commands)
 
 
@@ -204,8 +203,5 @@ re:
  - `apk del` ; to delete 
  - `apk update` : to update 
  - `apk upgrade` : to upgrade
-
-
-## Common command for dockerfile
 
 ## Common commands for Docker-compose
