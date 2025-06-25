@@ -116,7 +116,12 @@ or you can use it in the second use like this <br>
 	context: relative path to folder of the docker file 
 	dockerfile: the name of your  docker file  
 ```
+
 - command : to use different command from the command that is provided in the image 
+- container_name : by defaulf docker gives your container a name but if you want to specifies some name you can use this tag.
+- depends_on: Docker Compose starts the dependent services first in the specified order, then starts the other services, but it does not wait for the dependencies to be fully ready before starting the dependent services.
+- dns :  used in Docker Networks. docker provides internal DNS server to containers in user
+
 
 ### Volume
 ### Network 
@@ -153,6 +158,10 @@ there another type of caches called (Runtime cache). creat temporary files and t
 ## Metadata in docker
 Metadata in Docker means information about the image or container. not teh actual code or app. like using the ENVIRONMENT variables. using the instruction ENV in Dockerfile or using EXPOSE. just to provide additionatl inforamtion. and it is useful for organizing ,  documentating
 or automating the things.
+
+## Daemon
+- it is the brains of the docker platform
+
 
 # Common commands
 - [Docker commands](#docker-commands)
