@@ -19,6 +19,7 @@ it is platform designed to simplify the process of developing shipping and ruuni
 - [Daemon](#daemon)
 - [Prevent caches](#prevent-caches-on-installation)
 - [Meta data in docker](#metadata-in-docker)
+- [docker network](#docker-network)
 
 # containerization vs virtualization
 both are technologies for running isolated applications.
@@ -96,10 +97,15 @@ is the actual software or service designed to perform tasks.
 
 ## Docker compose
 
-is a tool for defining and runnig multi-container docker applications. with compose you can use YAML (Stands for Yet Another Markup Language, it is data serialization language) fle to configure your applicaion's services
+is a tool for defining and runnig multi-container docker applications that belong together in one isolated environment . with compose you can use YAML (Stands for Yet Another Markup Language, it is data serialization language it is much easier to read and use for simple conifiguration) file to configure your applicaion's services.
+with docker compose you can start all multiple services with single command.
+
 service == container.
 
 Main structure of a compose file consist of three major part. 
+
+![docker compose structure ](./Docker-compose.png)
+
 - [Service](#service)
 - [Volume](#volume)
 - [Network](#network)
@@ -108,7 +114,7 @@ the service configuration specified with the tag `service:`
 the configuration options under the service tag
 
 ### Service
-
+this section it is specifies the details of the containers running on it.
 - build : wich docker file to build from like `build: ./pathToDockerfile`
 or you can use it in the second use like this <br>
 ```
@@ -125,10 +131,6 @@ or you can use it in the second use like this <br>
 
 ### Volume
 ### Network 
-
-
-### Syntax
-![Docker-compose](./Docker-compose.png)
 
 version : wich syntash should be used.  can written in the format "x.x".
 services: you can group here a set of services that you want to run.
@@ -154,6 +156,9 @@ the cashes used to save the stat of the application package format. to prevent r
 
 there another type of caches called (Runtime cache). creat temporary files and this files created by teh app to make it run faster. like the caches in google chrom when you remove it you need to reenter the information. and these caches created by the app itself.
 
+## docker network
+docker network allows containers to communicate with each other and with the external world.
+`docker network create`
 
 ## Metadata in docker
 Metadata in Docker means information about the image or container. not teh actual code or app. like using the ENVIRONMENT variables. using the instruction ENV in Dockerfile or using EXPOSE. just to provide additionatl inforamtion. and it is useful for organizing ,  documentating
