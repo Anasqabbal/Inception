@@ -158,7 +158,7 @@ there another type of caches called (Runtime cache). creat temporary files and t
 
 ## docker network
 docker network allows containers to communicate with each other and with the external world.
-`docker network create`
+`docker network create <network name>` : creat a new network
 
 ## Metadata in docker
 Metadata in Docker means information about the image or container. not teh actual code or app. like using the ENVIRONMENT variables. using the instruction ENV in Dockerfile or using EXPOSE. just to provide additionatl inforamtion. and it is useful for organizing ,  documentating
