@@ -174,8 +174,8 @@ or automating the things.
 
 
 ## Docker commands
-- `docke` : print the neccessary command on the docker
-- `docker pull `  downloads an image from a docker registry to you local machin
+- `docker` : print the neccessary command on the docker
+- `docker pull `  downloads an image from a docker registry to you local machine
 - `docker build`  builds a new docker image from a dockerfile
 	- -t : stands for (tag). to give your image a name and a tag
 - `docker images ` lists all docker images stored on your local machine
