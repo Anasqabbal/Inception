@@ -1,0 +1,142 @@
+version: "3.3"
+
+volumes:
+  wp-volume:
+    driver_opts:
+      type: none
+      o : bind
+      device: /home/${USER}/data/wordpress
+
+  db-volume:
+    driver_opts:
+      type: none
+      o: bind
+      device: /home/${USER}/data/mariadb
+
+networks:
+  inception:
+    driver: bridge
+
+# #-----------------MANDATORY PARY-------------
+
+services:
+  mariadb:
+    build:
+      context: requirements/mariadb
+      args:
+        DB_NAME: ${DB_NAME}
+        DB_USER: ${DB_USER}
+        DB_PASS: ${DB_PASS}
+        DB_ROOT: ${DB_ROOT}
+    container_name: mariadb
+    image: mariadb:0
+    ports:
+      - "3306:3306"
+    networks:
+      - inception
+    volumes:
+      - db-volume:/var/lib/mysql
+    env_file: .env
+    restart: always
+
+  nginx:
+    image: nginx:0
+    build:
+      context: requirements/nginx
+      args:
+        DOMAIN_NAME: ${DOMAIN_NAME}
+    ports:
+      - "443:443"
+    networks:
+      - inception
+    env_file: .env
+    volumes:
+      - wp-volume:/var/www/html
+    depends_on:
+      - wordpress
+    container_name: nginx
+
+  wordpress:
+    image: wordpress:0
+    build:
+      context: .
+      dockerfile: requirements/wordpress/Dockerfile
+    networks:
+      - inception
+    volumes:
+      - wp-volume:/var/www/html
+    env_file: .env
+    depends_on:
+      - mariadb
+      - redis
+    container_name: wordpress
+    restart: always
+
+#      BONUS PART 
+  redis:
+    image: redis:0
+    build: requirements/bonus/redis/
+    container_name: redis
+    networks:
+      - inception
+    ports: 
+      - "6379:6379"
+    restart: always
+
+  vsftpd:
+    image: vsftpd:0
+    build:
+      context: .
+      dockerfile: requirements/bonus/vsftpd/Dockerfile
+      args:
+        FTP_USR: ${FTP_USR}
+        FTP_PWD: ${FTP_PWD}
+    container_name: vsftpd
+    ports:
+      - "21:21"
+    volumes:
+      - wp-volume:/var/www/html
+    networks:
+     - inception
+    restart: always
+
+  adminer:
+    image: adminer:0
+    build:
+      context: .
+      dockerfile: requirements/bonus/adminer/Dockerfile
+    container_name: adminer
+    depends_on:
+      - mariadb
+    ports:
+      - "8080:8080"
+    networks:
+     - inception
+    restart: always
+
+  website:
+    image: website:0
+    build: requirements/bonus/website/
+    container_name: website
+    ports:
+      - "8081:8080"
+    volumes:
+      - ~/project/srcs/requirements/bonus/website:/var/www/html/
+
+
+  cadvisor:
+    image: cadvisor:0
+    container_name: cadvisor
+    build:
+      context: requirements/bonus/cadvisor/
+    ports:
+      - "8082:8080"
+    volumes:
+      - /:/rootfs:ro
+      - /var/run:/var/run:ro
+      - /sys:/sys:ro
+      - /var/lib/docker/:/var/lib/docker:ro
+      - /dev/disk/:/dev/disk:ro
+    devices:
+      - /dev/kmsg
+    restart: always

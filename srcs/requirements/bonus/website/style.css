@@ -1,0 +1,21 @@
+html, body {
+	scroll-behavior: smooth;
+	margin: 0;
+	padding: 0;
+	height: 100%;
+	overflow-x: hidden;
+}
+
+.middle-page {
+	padding-top: 60px;
+}
+
+.section {
+	min-height: 100vh;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	padding: 40px 20px;
+	box-sizing: border-box;
+}
